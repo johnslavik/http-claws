@@ -1,0 +1,12 @@
+@reference 'tailwindcss';
+
+@layer base {
+  html {
+    @apply snap-proximity scroll-smooth;
+  }
+  body, #root {
+    @apply flex flex-col;
+    @apply bg-gray-50;
+    @apply min-h-screen;
+  }
+}
