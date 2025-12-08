@@ -9,8 +9,14 @@
 
 	export function focus(ref: HTMLElement | undefined, idx: number = 0): void {
 		const input = getInput(ref, idx);
-		input?.focus();
-		input?.setSelectionRange(0, 0);
+		if (input) {
+			if (input.disabled && idx != 3) {
+				focus(ref, idx + 1);
+				return;
+			}
+			input.focus();
+			input.setSelectionRange(0, 0);
+		}
 	}
 </script>
 
@@ -26,7 +32,7 @@
 		} else {
 			return 0;
 		}
-		return digits[idx] ? 1 : -1;
+		return digits[idx] ? 1 : 0;
 	}
 
 	function handleKey(idx: number, ev: KeyboardEvent): void {
