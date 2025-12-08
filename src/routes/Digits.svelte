@@ -3,15 +3,18 @@
 		return Array.from(ref?.querySelectorAll('input') ?? []);
 	}
 
-	export function getInput(ref: HTMLElement | undefined, idx: number = 0): HTMLInputElement | undefined {
+	export function getInput(
+		ref: HTMLElement | undefined,
+		idx: number = 0
+	): HTMLInputElement | undefined {
 		return getInputs(ref)[idx];
 	}
 
-	export function focus(ref: HTMLElement | undefined, idx: number = 0): void {
+	export function focus(ref: HTMLElement | undefined, idx: number = 0, direction: number = 1): void {
 		const input = getInput(ref, idx);
 		if (input) {
-			if (input.disabled && idx != 3) {
-				focus(ref, idx + 1);
+			if (input.disabled && idx != 2 + direction) {
+				focus(ref, idx + direction, direction);
 				return;
 			}
 			input.focus();
@@ -44,9 +47,9 @@
 		}
 
 		if (['Backspace', 'ArrowLeft'].includes(ev.code)) {
-			focus(ref, idx - 1);
+			focus(ref, idx - 1, -1);
 		} else if (['Delete', 'ArrowRight'].includes(ev.code)) {
-			focus(ref, idx + 1);
+			focus(ref, idx + 1, 1);
 		}
 	}
 </script>
@@ -54,7 +57,13 @@
 <div class="flex" bind:this={ref}>
 	{#each Array(3).keys() as idx}
 		<input
-			bind:value={() => digits[idx], (digit: string) => focus(ref, idx + setDigitAt(idx, digit))}
+			bind:value={
+				() => digits[idx],
+				(digit: string) => {
+					focus(ref, idx + setDigitAt(idx, digit));
+					
+				}
+			}
 			onkeydown={(ev: KeyboardEvent) => handleKey(idx, ev)}
 			type="text"
 			class="w-20 bg-transparent text-center text-5xl border"
@@ -62,7 +71,6 @@
 		/>
 	{/each}
 </div>
-
 
 <style>
 	:global(input[disabled='true']) {
