@@ -1,6 +1,5 @@
 <div class="text-center">
   <div class="flex justify-center p-[1em]">
-    <!-- todo: socials -->
     <div></div>
     <div></div>
     <div></div>
@@ -14,7 +13,7 @@
       <a href="https://twitter.com/rogeriopvl">@rogeriopvl</a>
     </p>
     <p>
-      Original Images by<!-- --> Tomomi Imura (<a href="https://twitter.com/girlie_mac"
+      Original images by<!-- --> Tomomi Imura (<a href="https://twitter.com/girlie_mac"
         >@girlie_mac</a
       >)
     </p>
